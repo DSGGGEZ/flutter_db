@@ -51,7 +51,7 @@ class TransactionDB {
       // print(record['amount'].runtimeType);
       // print(record['date'].runtimeType);
       // print("--------");
-      
+
       int id = record.key;
       String title = record['title'].toString();
       double amount = double.parse(record['amount'].toString());
@@ -74,11 +74,10 @@ class TransactionDB {
 
     //filter from 'title' and 'date'
     final finder = Finder(
-      filter: Filter.and(<Filter>[
-        Filter.equals('title', statement.title),
-        Filter.equals('date', statement.date)
-      ])
-    );
+        filter: Filter.and(<Filter>[
+      Filter.equals('title', statement.title),
+      Filter.equals('date', statement.date)
+    ]));
     var updateResult =
         await store.update(db, statement.toMap(), finder: finder);
     print("Delete data with id $updateResult");
@@ -95,11 +94,10 @@ class TransactionDB {
     print("Statement id is ${statement.id}");
 
     final finder = Finder(
-      filter: Filter.and(<Filter>[
-        Filter.equals('title', statement.title),
-        Filter.equals('date', statement.date)
-      ])
-    );
+        filter: Filter.and(<Filter>[
+      Filter.equals('title', statement.title),
+      Filter.equals('date', statement.date)
+    ]));
     var deleteResult = await store.delete(db, finder: finder);
     print("Delete data with id $deleteResult");
     db.close();

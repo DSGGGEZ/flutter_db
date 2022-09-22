@@ -58,39 +58,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   Transactions data = providers.transactions[index];
                   return Card(
                       elevation: 5,
-                      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                      
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 10),
                       child: ListTile(
-                        enabled: true,
-                        leading: CircleAvatar(
-                            radius: 30,
-                            child: FittedBox(
-                              child: Text(data.amount.toString()),
-                            )),
-                        title: Text(data.title),
-                        subtitle: Text(data.date),
-                        onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return FormEditScreen(data: data);
-                              }));
-                            },
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete), 
-                          onPressed: () {
-                          // call provider
+                          enabled: true,
+                          leading: CircleAvatar(
+                              radius: 30,
+                              child: FittedBox(
+                                child: Text(data.amount.toString()),
+                              )),
+                          title: Text(data.title),
+                          subtitle: Text(data.date),
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return FormEditScreen(data: data);
+                            }));
+                          },
+                          trailing: IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () {
+                                // call provider
                                 var provider = Provider.of<TransactionProvider>(
                                     context,
                                     listen: false);
                                 provider.deleteTransaction(data);
-                          }
-                        )
-                      ));
+                              })));
                 },
               );
             }
           },
-        )
-    );
+        ));
   }
 }

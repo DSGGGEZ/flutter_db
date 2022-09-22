@@ -1,5 +1,3 @@
-
-
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
@@ -9,17 +7,14 @@ import 'package:flutter_db/models/transactions.dart';
 import 'package:intl/intl.dart';
 
 class FormScreen extends StatelessWidget {
-
   final formKey = GlobalKey<FormState>();
 
   //Controller
   final titleController = TextEditingController();
   final amountController = TextEditingController();
-  
 
-
-    final ButtonStyle style =
-        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
+  final ButtonStyle style =
+      ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
 
   FormScreen({super.key});
 
@@ -65,7 +60,6 @@ class FormScreen extends StatelessWidget {
                         style: style,
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            
                             var title = titleController.text;
                             var amount = double.parse(amountController.text);
 
@@ -76,7 +70,8 @@ class FormScreen extends StatelessWidget {
                             Transactions item = Transactions(
                                 title: title,
                                 amount: amount,
-                                date:  DateFormat('yyyy-MM-dd - kk:mm:ss').format(DateTime.now()));
+                                date: DateFormat('yyyy-MM-dd - kk:mm:ss')
+                                    .format(DateTime.now()));
                             provider.addTransaction(item);
                             Navigator.pop(context);
                           }
