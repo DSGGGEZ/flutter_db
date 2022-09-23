@@ -11,7 +11,8 @@ class FormScreen extends StatelessWidget {
 
   //Controller
   final titleController = TextEditingController();
-  final amountController = TextEditingController();
+  final detailController = TextEditingController();
+  final writerController = TextEditingController();
 
   final ButtonStyle style =
       ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
@@ -22,7 +23,7 @@ class FormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('แบบฟอร์มบันทึกข้อมูล'),
+          title: const Text('Today Diary'),
         ),
         body: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -32,26 +33,33 @@ class FormScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
-                      decoration: const InputDecoration(labelText: "Item Name"),
-                      autofocus: false,
+                      decoration: const InputDecoration(labelText: "Title"),
+                      autofocus: true,
                       controller: titleController,
                       validator: (String? str) {
                         if (str!.isEmpty) {
-                          return "Please input Item Name.";
+                          return "Please input Title.";
                         }
                         return null;
                       },
                     ),
                     TextFormField(
-                      decoration: const InputDecoration(labelText: "Price"),
-                      keyboardType: TextInputType.number,
-                      controller: amountController,
+                      decoration: const InputDecoration(labelText: "Detail"),
+                      controller: detailController,
                       validator: (String? str) {
                         if (str!.isEmpty) {
-                          return "Please input Price.";
+                          return "Please input Detail.";
                         }
-                        if (double.parse(str) <= 0) {
-                          return "Please input Price more than 0.";
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      decoration:
+                          const InputDecoration(labelText: "Writer Name"),
+                      controller: writerController,
+                      validator: (String? str) {
+                        if (str!.isEmpty) {
+                          return "Please input Writer Name.";
                         }
                         return null;
                       },
@@ -61,7 +69,8 @@ class FormScreen extends StatelessWidget {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             var title = titleController.text;
-                            var amount = double.parse(amountController.text);
+                            var detail = detailController.text;
+                            var writer = writerController.text;
 
                             // call provider
                             var provider = Provider.of<TransactionProvider>(
@@ -69,14 +78,15 @@ class FormScreen extends StatelessWidget {
                                 listen: false);
                             Transactions item = Transactions(
                                 title: title,
-                                amount: amount,
-                                date: DateFormat('yyyy-MM-dd - kk:mm:ss')
+                                detail: detail,
+                                writer: writer,
+                                date: DateFormat('yyyy-MM-dd')
                                     .format(DateTime.now()));
                             provider.addTransaction(item);
                             Navigator.pop(context);
                           }
                         },
-                        child: const Text("Add data"))
+                        child: const Text("บันทึกไดอารี"))
                   ]),
             )));
   }

@@ -21,7 +21,8 @@ class _FormEditScreenState extends State<FormEditScreen> {
 
   final idController = TextEditingController();
   final titleController = TextEditingController();
-  final amountController = TextEditingController();
+  final detailController = TextEditingController();
+  final writerController = TextEditingController();
 
   final ButtonStyle style =
       ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
@@ -31,14 +32,15 @@ class _FormEditScreenState extends State<FormEditScreen> {
     super.initState();
     idController.text = widget.data.id.toString();
     titleController.text = widget.data.title.toString();
-    amountController.text = widget.data.amount.toString();
+    detailController.text = widget.data.detail.toString();
+    writerController.text = widget.data.writer.toString();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('แบบฟอร์มแก้ไขข้อมูล'),
+          title: const Text('Edit Diary'),
         ),
         body: Padding(
             padding: const EdgeInsets.all(10.0),
@@ -51,30 +53,35 @@ class _FormEditScreenState extends State<FormEditScreen> {
                       enabled: false,
                       style: const TextStyle(color: Colors.black54),
                       decoration: const InputDecoration(labelText: "Item ID"),
-                      autofocus: false,
                       controller: idController,
                     ),
                     TextFormField(
-                      decoration: const InputDecoration(labelText: "Item Name"),
-                      autofocus: false,
+                      decoration: const InputDecoration(labelText: "Title"),
+                      autofocus: true,
                       controller: titleController,
                       validator: (String? str) {
                         if (str!.isEmpty) {
-                          return "Please input Item Name.";
+                          return "Please input Title.";
                         }
                         return null;
                       },
                     ),
                     TextFormField(
-                      decoration: const InputDecoration(labelText: "Price"),
-                      keyboardType: TextInputType.number,
-                      controller: amountController,
+                      decoration: const InputDecoration(labelText: "Detail"),
+                      controller: detailController,
                       validator: (String? str) {
                         if (str!.isEmpty) {
-                          return "Please input Price.";
+                          return "Please input Detail.";
                         }
-                        if (double.parse(str) <= 0) {
-                          return "Please input Price more than 0.";
+                        return null;
+                      },
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(labelText: "Writer"),
+                      controller: writerController,
+                      validator: (String? str) {
+                        if (str!.isEmpty) {
+                          return "Please input Writer.";
                         }
                         return null;
                       },
@@ -85,7 +92,8 @@ class _FormEditScreenState extends State<FormEditScreen> {
                           if (formKey.currentState!.validate()) {
                             var id = int.parse(idController.text);
                             var title = titleController.text;
-                            var amount = double.parse(amountController.text);
+                            var detail = detailController.text;
+                            var writer = writerController.text;
 
                             // call provider
                             var provider = Provider.of<TransactionProvider>(
@@ -94,13 +102,14 @@ class _FormEditScreenState extends State<FormEditScreen> {
                             Transactions item = Transactions(
                                 id: id,
                                 title: title,
-                                amount: amount,
+                                detail: detail,
+                                writer: writer,
                                 date: widget.data.date);
                             provider.updateTransaction(item);
                             Navigator.pop(context);
                           }
                         },
-                        child: const Text("Save data"))
+                        child: const Text("Edit"))
                   ]),
             )));
   }

@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Expense App"),
+          title: const Text("What's your today diary?"),
           actions: [
             IconButton(
                 icon: const Icon(Icons.exit_to_app),
@@ -65,10 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           leading: CircleAvatar(
                               radius: 30,
                               child: FittedBox(
-                                child: Text(data.amount.toString()),
+                                child: Text(data.date.toString()),
                               )),
                           title: Text(data.title),
-                          subtitle: Text(data.date),
+                          subtitle: Text(data.detail + "\n" + data.writer),
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {

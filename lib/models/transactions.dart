@@ -2,20 +2,23 @@
 class Transactions {
   late int? id;
   String title;
-  double amount;
+  String detail;
+  String writer;
   String date;
 
   Transactions(
       {this.id,
       required this.title,
-      required this.amount,
+      required this.detail,
+      required this.writer,
       required this.date});
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'title': title,
-      'amount': amount,
+      'detail': detail,
+      'writer': writer,
       'date': date
     };
   }

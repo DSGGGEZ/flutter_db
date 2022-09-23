@@ -17,10 +17,7 @@
 //Path to a program.
 CMAKE_AR:FILEPATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.32.31326/bin/Hostx64/x64/lib.exe
 
-//Semicolon separated list of supported configuration types, only
-// supports Debug, Release, MinSizeRel, and RelWithDebInfo, anything
-// else will be ignored.
-CMAKE_CONFIGURATION_TYPES:STRING=Debug;Release;MinSizeRel;RelWithDebInfo
+CMAKE_CONFIGURATION_TYPES:STRING=Debug;Profile;Release
 
 //Flags used by the CXX compiler during all build types.
 CMAKE_CXX_FLAGS:STRING=/DWIN32 /D_WINDOWS /W3 /GR /EHsc
@@ -173,6 +170,15 @@ flutter_db_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 flutter_db_SOURCE_DIR:STATIC=D:/NU/Mobile Application Development/Project/flutter_db/windows
 
+//Value Computed by CMake
+runner_BINARY_DIR:STATIC=D:/NU/Mobile Application Development/Project/flutter_db/build/windows/runner
+
+//Value Computed by CMake
+runner_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+runner_SOURCE_DIR:STATIC=D:/NU/Mobile Application Development/Project/flutter_db/windows/runner
+
 
 ########################
 # INTERNAL cache entries
@@ -246,7 +252,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MT
 CMAKE_MT-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
 //Platform information initialized
 CMAKE_PLATFORM_INFO_INITIALIZED:INTERNAL=1
 //noop for ranlib

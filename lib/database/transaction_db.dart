@@ -30,7 +30,8 @@ class TransactionDB {
     var keyID = store.add(db, {
       "id": statement.id,
       "title": statement.title,
-      "amount": statement.amount,
+      "detail": statement.detail,
+      "writer": statement.writer,
       "date": statement.date
     });
     db.close();
@@ -47,18 +48,13 @@ class TransactionDB {
         finder: Finder(sortOrders: [SortOrder(Field.key, false)]));
     List<Transactions> transactionList = [];
     for (var record in snapshot) {
-      // print(record['title'].runtimeType);
-      // print(record['amount'].runtimeType);
-      // print(record['date'].runtimeType);
-      // print("--------");
-
       int id = record.key;
       String title = record['title'].toString();
-      double amount = double.parse(record['amount'].toString());
+      String detail = record['detail'].toString();
+      String writer = record['writer'].toString();
       String date = record['date'].toString();
-      // print(record['title']);
-      transactionList
-          .add(Transactions(id: id, title: title, amount: amount, date: date));
+      transactionList.add(Transactions(
+          id: id, title: title, detail: detail, writer: writer, date: date));
     }
     db.close();
     return transactionList;
@@ -76,6 +72,8 @@ class TransactionDB {
     final finder = Finder(
         filter: Filter.and(<Filter>[
       Filter.equals('title', statement.title),
+      Filter.equals('detail', statement.title),
+      Filter.equals('writer', statement.title),
       Filter.equals('date', statement.date)
     ]));
     var updateResult =
@@ -96,6 +94,8 @@ class TransactionDB {
     final finder = Finder(
         filter: Filter.and(<Filter>[
       Filter.equals('title', statement.title),
+      Filter.equals('detail', statement.title),
+      Filter.equals('writer', statement.title),
       Filter.equals('date', statement.date)
     ]));
     var deleteResult = await store.delete(db, finder: finder);
@@ -113,17 +113,14 @@ class TransactionDB {
         await store.find(db, finder: Finder(filter: Filter.byKey(id)));
     Transactions? transaction;
     for (var record in snapshot) {
-      // print(record['title'].runtimeType);
-      // print(record['amount'].runtimeType);
-      // print(record['date'].runtimeType);
-      // print("--------");
       int id = int.parse(record['id'].toString());
       String title = record['title'].toString();
-      double amount = double.parse(record['amount'].toString());
+      String detail = record['detail'].toString();
+      String writer = record['writer'].toString();
       String date = record['date'].toString();
       // print(record['title']);
-      transaction =
-          Transactions(id: id, title: title, amount: amount, date: date);
+      transaction = Transactions(
+          id: id, title: title, detail: detail, writer: writer, date: date);
     }
     db.close();
     return transaction;

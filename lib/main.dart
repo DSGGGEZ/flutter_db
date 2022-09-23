@@ -24,11 +24,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'What\'s your today diary?',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.pink,
         ),
-        home: const MyHomePage(title: 'แอพบัญชี'),
+        home: const MyHomePage(title: 'Diary App'),
       ),
     );
   }
