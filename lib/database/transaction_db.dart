@@ -67,18 +67,19 @@ class TransactionDB {
 
     //create store
     var store = intMapStoreFactory.store("expense");
+    print("Statement id is ${statement.id}");
 
     //filter from 'title' and 'date'
     final finder = Finder(
         filter: Filter.and(<Filter>[
       Filter.equals('title', statement.title),
-      Filter.equals('detail', statement.title),
-      Filter.equals('writer', statement.title),
+      Filter.equals('detail', statement.detail),
+      Filter.equals('writer', statement.writer),
       Filter.equals('date', statement.date)
     ]));
     var updateResult =
         await store.update(db, statement.toMap(), finder: finder);
-    print("Delete data with id $updateResult");
+    print("Update data with id $updateResult");
     db.close();
   }
 
@@ -94,8 +95,8 @@ class TransactionDB {
     final finder = Finder(
         filter: Filter.and(<Filter>[
       Filter.equals('title', statement.title),
-      Filter.equals('detail', statement.title),
-      Filter.equals('writer', statement.title),
+      Filter.equals('detail', statement.detail),
+      Filter.equals('writer', statement.writer),
       Filter.equals('date', statement.date)
     ]));
     var deleteResult = await store.delete(db, finder: finder);
