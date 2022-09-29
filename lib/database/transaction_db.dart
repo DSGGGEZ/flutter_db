@@ -32,7 +32,8 @@ class TransactionDB {
       "title": statement.title,
       "detail": statement.detail,
       "writer": statement.writer,
-      "date": statement.date
+      "date": statement.date,
+      "time": statement.time
     });
     db.close();
     return keyID;
@@ -53,8 +54,14 @@ class TransactionDB {
       String detail = record['detail'].toString();
       String writer = record['writer'].toString();
       String date = record['date'].toString();
+      String time = record['time'].toString();
       transactionList.add(Transactions(
-          id: id, title: title, detail: detail, writer: writer, date: date));
+          id: id,
+          title: title,
+          detail: detail,
+          writer: writer,
+          date: date,
+          time: time));
     }
     db.close();
     return transactionList;
@@ -67,14 +74,12 @@ class TransactionDB {
 
     //create store
     var store = intMapStoreFactory.store("expense");
-    print("Statement id is ${statement.id}");
+    print("Update data with id ${statement.id}");
 
     //filter from 'title' and 'date'
     final finder = Finder(
         filter: Filter.and(<Filter>[
-      Filter.equals('title', statement.title),
-      Filter.equals('detail', statement.detail),
-      Filter.equals('writer', statement.writer),
+      Filter.equals('time', statement.time),
       Filter.equals('date', statement.date)
     ]));
     var updateResult =
@@ -94,9 +99,7 @@ class TransactionDB {
 
     final finder = Finder(
         filter: Filter.and(<Filter>[
-      Filter.equals('title', statement.title),
-      Filter.equals('detail', statement.detail),
-      Filter.equals('writer', statement.writer),
+      Filter.equals('time', statement.time),
       Filter.equals('date', statement.date)
     ]));
     var deleteResult = await store.delete(db, finder: finder);
@@ -119,9 +122,15 @@ class TransactionDB {
       String detail = record['detail'].toString();
       String writer = record['writer'].toString();
       String date = record['date'].toString();
+      String time = record['time'].toString();
       // print(record['title']);
       transaction = Transactions(
-          id: id, title: title, detail: detail, writer: writer, date: date);
+          id: id,
+          title: title,
+          detail: detail,
+          writer: writer,
+          date: date,
+          time: time);
     }
     db.close();
     return transaction;

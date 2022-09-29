@@ -81,6 +81,8 @@ class FormScreen extends StatelessWidget {
                                 detail: detail,
                                 writer: writer,
                                 date: DateFormat('yyyy-MM-dd')
+                                    .format(DateTime.now()),
+                                time: DateFormat('hh:mm:ss')
                                     .format(DateTime.now()));
                             provider.addTransaction(item);
                             Navigator.pop(context);

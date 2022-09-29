@@ -104,7 +104,8 @@ class _FormEditScreenState extends State<FormEditScreen> {
                                 title: title,
                                 detail: detail,
                                 writer: writer,
-                                date: widget.data.date);
+                                date: widget.data.date,
+                                time: widget.data.time);
                             provider.updateTransaction(item);
                             Navigator.pop(context);
                           }
