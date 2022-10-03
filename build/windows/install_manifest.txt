@@ -1,0 +1,11 @@
+C:/Program Files (x86)/flutter_db/flutter_db.exe
+C:/Program Files (x86)/flutter_db/data/icudtl.dat
+C:/Program Files (x86)/flutter_db/flutter_windows.dll
+C:/Program Files (x86)/flutter_db/data/flutter_assets/AssetManifest.json
+C:/Program Files (x86)/flutter_db/data/flutter_assets/FontManifest.json
+C:/Program Files (x86)/flutter_db/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+C:/Program Files (x86)/flutter_db/data/flutter_assets/kernel_blob.bin
+C:/Program Files (x86)/flutter_db/data/flutter_assets/NOTICES
+C:/Program Files (x86)/flutter_db/data/flutter_assets/NOTICES.Z
+C:/Program Files (x86)/flutter_db/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+C:/Program Files (x86)/flutter_db/data/flutter_assets/shaders/ink_sparkle.frag
