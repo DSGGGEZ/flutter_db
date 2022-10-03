@@ -57,33 +57,59 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemBuilder: (context, int index) {
                   Transactions data = providers.transactions[index];
                   return Card(
-                      elevation: 5,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      child: ListTile(
-                          enabled: true,
-                          leading: CircleAvatar(
-                              radius: 30,
-                              child: FittedBox(
-                                child: Text(data.date.toString()),
-                              )),
-                          title: Text(data.title),
-                          subtitle: Text(data.detail + "\n" + data.writer),
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return FormEditScreen(data: data);
-                            }));
-                          },
-                          trailing: IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () {
-                                // call provider
-                                var provider = Provider.of<TransactionProvider>(
-                                    context,
-                                    listen: false);
-                                provider.deleteTransaction(data);
-                              })));
+                      clipBehavior: Clip.antiAlias,
+                      child: Column(
+                        children: [
+                          ListTile(
+                            leading: Icon(Icons.calendar_month),
+                            title: Text(data.title),
+                            subtitle: Text(
+                              data.date.toString() + " " + data.time.toString(),
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.6)),
+                            ),
+                          ),
+                          ListTile(
+                            title: Text(
+                              data.detail,
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.6)),
+                            ),
+                            subtitle: Text("\nWriter : " + data.writer),
+                          ),
+                          ButtonBar(
+                              alignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                    icon: const Icon(Icons.edit),
+                                    onPressed: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return FormEditScreen(data: data);
+                                      }));
+                                    }),
+                                IconButton(
+                                    icon: const Icon(Icons.delete),
+                                    onPressed: () {
+                                      var provider =
+                                          Provider.of<TransactionProvider>(
+                                              context,
+                                              listen: false);
+                                      provider.deleteTransaction(data);
+                                    })
+                              ]
+                              // IconButton(
+                              //     icon: const Icon(Icons.delete),
+                              //     onPressed: () {
+                              //       // call provider
+                              //       var provider =
+                              //           Provider.of<TransactionProvider>(context,
+                              //               listen: false);
+                              //       provider.deleteTransaction(data);
+                              //     })
+                              )
+                        ],
+                      ));
                 },
               );
             }
